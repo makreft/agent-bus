@@ -1,0 +1,58 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__agent-bus__send",
+      "mcp__agent-bus__inbox",
+      "mcp__agent-bus__agents",
+      "mcp__agent-bus__sent"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-bus ready --mode unread",
+            "asyncRewake": true,
+            "timeout": 86400
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-bus busy",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-bus ready",
+            "asyncRewake": true,
+            "timeout": 86400
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-bus bye",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
